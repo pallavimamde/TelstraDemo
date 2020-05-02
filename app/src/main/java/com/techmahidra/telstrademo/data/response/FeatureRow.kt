@@ -1,6 +1,6 @@
-package com.techmahidra.telstrademo.data
+package com.techmahidra.telstrademo.data.response
 
-data class FeaturesRow(
+data class FeatureRow(
     val description: String,
     val imageHref: String,
     val title: String

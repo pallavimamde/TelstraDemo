@@ -2,14 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.techmahidra.telstrademo">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
+        android:name=".TelstraApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.techmahidra.telstrademo.ui.category.MainActivity">
+        <activity android:name="com.techmahidra.telstrademo.ui.feature.FeatureActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
