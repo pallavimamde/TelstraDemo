@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">TelstraDemo</string>
-
+    <string name="please_wait_msg">Loading!!!</string>
+    <string name="content_dscr_geninfo_list_photo">Feature Row Photo</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
