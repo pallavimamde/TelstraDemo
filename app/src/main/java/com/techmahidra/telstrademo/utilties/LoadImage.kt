@@ -5,7 +5,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.techmahidra.telstrademo.R
 
-
+/* *
+* LoadImage - load image using @Glide lib
+* #uri - Link to load image from path
+* */
 fun ImageView.loadImage(uri: String?) {
     val options = RequestOptions()
         .placeholder(R.mipmap.ic_launcher_round)

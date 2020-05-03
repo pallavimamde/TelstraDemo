@@ -1,7 +1,10 @@
 package com.techmahidra.telstrademo.data.response
 
+/* *
+ * FeatureRow - list content object
+ * */
 data class FeatureRow(
-    val description: String,
-    val imageHref: String,
-    val title: String
+    var description: String,
+    var imageHref: String,
+    var title: String
 )

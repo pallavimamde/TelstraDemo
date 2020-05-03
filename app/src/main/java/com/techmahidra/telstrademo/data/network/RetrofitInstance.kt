@@ -8,6 +8,10 @@ import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
+/* *
+* RetrofitInstance - Created retrofit object for server request
+* */
+
 const val BASE_URL = "https://dl.dropboxusercontent.com/"
 
 val retrofitInstance = module {
@@ -21,10 +25,10 @@ val retrofitInstance = module {
 }
 
 fun createWebService(): APIService {
-    val retrofit = Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .baseUrl(BASE_URL)
+    val retrofit = Retrofit.Builder() // create retrofit instance
+        .baseUrl(BASE_URL) // base url
+        .addConverterFactory(GsonConverterFactory.create()) // convert to and from from json
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // to add adapter
         .build()
 
     return retrofit.create(APIService::class.java)
