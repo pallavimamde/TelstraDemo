@@ -12,15 +12,10 @@ import kotlinx.android.synthetic.main.adapter_feature_list.view.*
 class FeatureListAdapter(private val featureRow: List<FeatureRow>) :
     RecyclerView.Adapter<FeatureListAdapter.ViewHolder>() {
 
-  /*  fun updateFeatureInfo(newFeatureRows: List<FeatureRow>) {
-        featureRow.clear()
-        featureRow.addAll(newFeatureRows)
-        notifyDataSetChanged()
-    }
-*/
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.adapter_feature_list, parent, false)
+        val v = LayoutInflater.from(parent.context)
+            .inflate(R.layout.adapter_feature_list, parent, false)
         return ViewHolder(v)
     }
 
@@ -41,12 +36,4 @@ class FeatureListAdapter(private val featureRow: List<FeatureRow>) :
         }
     }
 
-/*
-    fun setItemClickListener(clickListener: ItemClickListener) {
-        onItemClickListener = clickListener
-    }
-
-    interface ItemClickListener {
-        fun onItemClick(view: View, position: Int)
-    }*/
 }

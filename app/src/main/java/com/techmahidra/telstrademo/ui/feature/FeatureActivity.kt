@@ -10,8 +10,8 @@ class FeatureActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feature)
-        if(savedInstanceState == null)
-            replaceFragment(FeatureFragment(),R.id.fragment_container)
+        if (savedInstanceState == null)
+            replaceFragment(FeatureFragment(), R.id.fragment_container)
     }
 
 }

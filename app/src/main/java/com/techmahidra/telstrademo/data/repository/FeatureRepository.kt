@@ -5,11 +5,14 @@ import com.techmahidra.telstrademo.data.response.FeatureResponse
 import retrofit2.Call
 import retrofit2.Response
 
-class FeatureRepository (private val aPIService: APIService) {
+class FeatureRepository(private val aPIService: APIService) {
 
     fun getProducts(onFeatureInfo: OnFeatureInfo) {
         aPIService.getFeatureInfo().enqueue(object : retrofit2.Callback<FeatureResponse> {
-            override fun onResponse(call: Call<FeatureResponse>, response: Response<FeatureResponse>) {
+            override fun onResponse(
+                call: Call<FeatureResponse>,
+                response: Response<FeatureResponse>
+            ) {
                 onFeatureInfo.onSuccess((response.body() as FeatureResponse))
             }
 

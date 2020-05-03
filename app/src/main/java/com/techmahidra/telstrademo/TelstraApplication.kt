@@ -7,9 +7,11 @@ import org.koin.android.ext.android.startKoin
 class TelstraApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        startKoin(this,
+        startKoin(
+            this,
             listOf(retrofitInstance),
-            loadPropertiesFromFile = true)
+            loadPropertiesFromFile = true
+        )
     }
 
 }

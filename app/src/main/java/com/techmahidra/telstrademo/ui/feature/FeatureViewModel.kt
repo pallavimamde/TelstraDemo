@@ -6,7 +6,7 @@ import com.techmahidra.telstrademo.data.repository.FeatureRepository
 import com.techmahidra.telstrademo.data.response.FeatureResponse
 import org.koin.standalone.KoinComponent
 
-class FeatureViewModel (private val featureRepository: FeatureRepository) : ViewModel(),
+class FeatureViewModel(private val featureRepository: FeatureRepository) : ViewModel(),
     KoinComponent {
 
     var featureResponse = MutableLiveData<FeatureResponse>()
