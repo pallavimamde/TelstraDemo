@@ -20,7 +20,9 @@ import com.techmahidra.telstrademo.ui.feature.adapter.FeatureListAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 import androidx.lifecycle.Observer
 import com.techmahidra.telstrademo.TelstraApplication
+import com.techmahidra.telstrademo.data.response.ApiResponseFail
 import com.techmahidra.telstrademo.data.response.FeatureRow
+import com.techmahidra.telstrademo.utilties.NetworkConnectionStatus
 import kotlinx.android.synthetic.main.fragment_feature.*
 import kotlinx.android.synthetic.main.no_data_layout.*
 
@@ -57,7 +59,6 @@ class FeatureFragment : Fragment(), UIHandler {
         loadingDialog = Dialog(activity as AppCompatActivity)
         loadingDialog.setCancelable(false)
         loadingDialog.setCanceledOnTouchOutside(false)
-        featureViewModel.onViewActive(this)
         loadData()
         swipe_refresh.setOnRefreshListener {
             isRefreshing = true
@@ -70,31 +71,55 @@ class FeatureFragment : Fragment(), UIHandler {
 
     // get data from server
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun loadData(refresh: Boolean = false) {
-        featureViewModel.getFeatureInfo(refresh)
-        featureViewModel.featureResponse.observe(
-            this,
-            Observer(function = fun(featureResponse: FeatureResponse) {
-                updateUI(featureResponse)
-            })
-        )
+    private fun loadData(isRefreshing: Boolean = false) {
+        // check internet connection
+        val hasInternetConnected =
+            NetworkConnectionStatus(TelstraApplication.applicationContext()).isOnline()
+        if (hasInternetConnected) {
+            if (!isRefreshing) { // if default refreshing is visible don't show loading dialog
+                showLoading(
+                    TelstraApplication.applicationContext().resources.getString(
+                        R.string.please_wait
+                    )
+                )
+            }
+            // check the observer when api response is success and update list
+            featureViewModel.getFeatureInfo()
+            featureViewModel.featureResponse.observe(
+                this,
+                Observer(function = fun(featureResponse: FeatureResponse) {
+                    updateUI(featureResponse)
+                    hideLoading()
+                })
+            )
+            //check the observer when api response is failed and show the error
+            featureViewModel.apiResponseFail.observe(
+                this,
+                Observer(function = fun(apiResponseFail: ApiResponseFail) {
+                    showError(apiResponseFail.error)
+                    hideLoading()
+                })
+            )
+        } else {
+            showError(TelstraApplication.applicationContext().resources.getString(R.string.network_error))
+        }
     }
 
     // update UI
     @SuppressLint("WrongConstant")
     private fun updateUI(response: FeatureResponse) {
-        var modifiedFeatureList: ArrayList<FeatureRow> = ArrayList()
+        val modifiedFeatureList: ArrayList<FeatureRow> = ArrayList()
 
         // set actionbar title
         if (actionBar != null) {
             actionBar?.title = response.title
         }
 
-        if (response.featureRows.isNotEmpty()) {
-            for (item in response.featureRows) {
-                var featureRowTitle = "Empty string"
-                var featureRowDescription = "Empty string"
-                var featureRowUrl = "Empty string"
+        if (response.rows.isNotEmpty()) {
+            for (item in response.rows) {
+                val featureRowTitle = "Empty string"
+                val featureRowDescription = "Empty string"
+                val featureRowUrl = "Empty string"
                 var isAllNull = false
 
                 //check the empty or null string in response object
@@ -149,4 +174,14 @@ class FeatureFragment : Fragment(), UIHandler {
         tv_no_data.visibility = View.VISIBLE
     }
 
+}
+
+/*
+* UIHandler - helps to display user needed information while handling the server call
+* */
+interface UIHandler {
+    fun showLoading(loadingMessage: String)
+    fun hideLoading()
+    fun showNoData()
+    fun showError(errorMsg: String)
 }

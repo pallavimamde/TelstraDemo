@@ -2,18 +2,17 @@ package com.techmahidra.telstrademo.data.repository
 
 import com.techmahidra.telstrademo.data.network.APIService
 import com.techmahidra.telstrademo.data.response.FeatureResponse
-import com.techmahidra.telstrademo.utilties.NetworkStatus
 import retrofit2.Call
 import retrofit2.Response
 
 /* *
 * FeatureRepository - Retrofit callbacks events handle to check response is succeed or failed
 * */
-class FeatureRepository(private val aPIService: APIService) {
+class FeatureRepository(private val apiService: APIService) {
 
     fun getFeatureInfoReq(onFeatureInfo: OnFeatureInfo) {
 
-        aPIService.getFeatureInfo().enqueue(object : retrofit2.Callback<FeatureResponse> {
+        apiService.getFeatureInfo().enqueue(object : retrofit2.Callback<FeatureResponse> {
             override fun onResponse(
                 call: Call<FeatureResponse>,
                 response: Response<FeatureResponse>

@@ -1,5 +1,7 @@
 package com.techmahidra.telstrademo.data.network
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.techmahidra.telstrademo.data.repository.FeatureRepository
 import com.techmahidra.telstrademo.ui.feature.FeatureViewModel
 import retrofit2.Retrofit
@@ -14,6 +16,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 const val BASE_URL = "https://dl.dropboxusercontent.com/"
 
+@RequiresApi(Build.VERSION_CODES.M)
 val retrofitInstance = module {
 
     single { FeatureRepository(get()) }
