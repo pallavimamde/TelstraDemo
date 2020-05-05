@@ -22,10 +22,6 @@ class FeatureViewModel(private val featureRepository: FeatureRepository) : ViewM
     var featureResponse = MutableLiveData<FeatureResponse>()
     var apiResponseFail = MutableLiveData<ApiResponseFail>()
 
-    init {
-        getFeatureInfo()
-    }
-
     @RequiresApi(Build.VERSION_CODES.M)
     fun getFeatureInfo() {
 
