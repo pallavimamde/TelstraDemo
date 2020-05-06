@@ -34,7 +34,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/content_dscr_geninfo_list_photo"
-        android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintBottom_toBottomOf="@+id/divider"
         app:layout_constraintEnd_toEndOf="parent"
